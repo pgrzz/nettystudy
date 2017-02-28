@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd "
+        >
+
+    <!-- 自动搜索@Controller标注的类 -->
+    <context:component-scan base-package="protooneday,protooneday.service"/>
+
+    <context:property-placeholder location="server-config.properties"/>
+
+    <bean id="curatorRegistry" class="protooneday.server.CuratorRegistry">
+        <constructor-arg name="CONFIGUER" value="${registry.CONFIGUER}" />
+        <constructor-arg name="registryAddress" value="${registry.address}" />
+        <constructor-arg name="timeout" value="${registry.timeout}" />
+        <constructor-arg name="baseSleepTimeMs" value="${registry.baseSleepTimeMs}" />
+        <constructor-arg name="maxRetries" value="${registry.maxRetries}" />
+    </bean>
+
+
+    <!-- 配置 RPC 服务器 -->
+    <bean id="serverServer" class="protooneday.server.RpcServer">
+        <constructor-arg name="serverAddress" value="${server.address}"/>
+        <constructor-arg name="curatorRegistry" ref="curatorRegistry"/>
+    </bean>
+
+
+
+</beans>

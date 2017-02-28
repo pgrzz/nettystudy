@@ -1,0 +1,20 @@
+#set( $iAmVariable = "good!" )
+Welcome $name to velocity.com
+today is $date.
+#foreach ($i in $list)
+    $i
+#end
+$iAmVariable
+
+<br>
+
+<br>
+private  String $id;
+<br>
+private  String $tittle;
+<br>
+private  String $createTime;
+<br>
+private String $author;
+<br>
+private String $content;
