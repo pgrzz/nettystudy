@@ -1,0 +1,9 @@
+# 忽略所有*.class 结尾的文件
+*.class
+# 忽略out文件
+out/
+# 忽略.idea文件
+.idea/
+src/main/webapp/WEB-INF/datasourceContext.xml
+target/
+src/test/

@@ -2172,14 +2172,7 @@ public class Solution {
 
 
 
-    public static void main(String[] args){
-        int []a=new int[]{7,6,5,4,3,1,2,11,15,16,2,21};
-        new Solution().fastSort(a,0,a.length-1);
-        for(Integer s:a){
 
-            System.out.println(s);
-        }
-    }
 
 
     public int findDuplicate(int[] nums) {
@@ -2214,6 +2207,31 @@ public class Solution {
         return -1;
     }
 
+
+    void Permutation(char[] str,int index){
+
+
+
+        if(index==str.length){
+            System.out.println(str);
+        }else{
+            for(int i=index;i<str.length;i++){
+                char temp=str[index];
+                str[index]=str[i];
+                str[i]=temp;
+                Permutation(str,index+1);
+                 temp=str[index];
+                str[index]=str[i];
+                str[i]=temp;
+            }
+        }
+
+    }
+
+    public static void main(String[] args){
+        new Solution().Permutation(new char[]{'a','b','c','d'},0);
+
+    }
 
 }
 

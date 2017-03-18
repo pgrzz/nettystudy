@@ -1,5 +1,6 @@
 package ConCurrentDemo;
 
+import java.util.HashMap;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -14,6 +15,10 @@ public class ConditionTest {
     private static final Condition emptyLock=lock.newCondition();
     public static void main(String[]args) {
 
+        //局部性
+        Condition full=ConditionTest.fullLock;
+        Condition empty=ConditionTest.emptyLock;
+
         //消费者 没有消费则等待
         new Thread(new Runnable() {
             @Override
@@ -25,14 +30,14 @@ public class ConditionTest {
                     try {
                     while(a==0){
                         try {
-                            emptyLock.await();
+                            empty.await();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
                         a--;
                         System.out.println("消费a了当前a为"+a);
-                        fullLock.signalAll();
+                        full.signalAll();
 
                     }finally {
                         lock.unlock();
@@ -51,14 +56,14 @@ public class ConditionTest {
                     try {
                         while(a==10){
                             try {
-                                fullLock.await();
+                                full.await();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
                         }
                         a++;
                         System.out.println("生产了a现在为:"+a);
-                        emptyLock.signalAll();
+                        empty.signalAll();
                     }finally {
                         lock.unlock();
                     }

@@ -15,12 +15,11 @@ public class SynMutex implements Lock {
     private static class Sync extends AbstractQueuedSynchronizer{
 
         // report whether in locked state
-
-
         @Override
         protected boolean isHeldExclusively() {
             return  getState()==1;
         }
+
         public boolean  tryAcquire(int acquire){
             if(compareAndSetState(0,1)){
                 setExclusiveOwnerThread(Thread.currentThread());

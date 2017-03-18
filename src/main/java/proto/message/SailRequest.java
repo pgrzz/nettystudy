@@ -3,6 +3,7 @@ package proto.message;
 
 
 /**
+ *
  * Created by lenovo on 2017/2/15.
  */
 public class SailRequest {

@@ -86,7 +86,7 @@ public class CuratorDiscovery {
     }
 
 
-    public String  OnuploadService(List<String> dataList){
+    private String  OnuploadService(List<String> dataList){
         Random random=new Random();
         int index=random.nextInt(dataList.size());
         System.out.println("均值"+index);

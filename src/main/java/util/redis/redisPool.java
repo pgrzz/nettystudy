@@ -2,13 +2,20 @@ package util.redis;
 
 import redis.clients.jedis.*;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by lenovo on 2016/11/28.
  */
 public class redisPool {
+
+        @Resource
+    JedisPoolConfig jedisPoolConfig;
+
+    Properties properties=new Properties();
 
      private static  ShardedJedisPool shardedJedisPool;
      static {

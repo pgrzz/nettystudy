@@ -42,10 +42,8 @@ public class TreeSolution {
         boolean result=false;
        if(p!=null && q!=null && p.val==q.val){
             result=isSameTree(p.left,q.left);
-           if(result==false)
+           if(!result)
                return false;
-           result=isSameTree(p.right,q.right);
-
        }
         if(p ==null && q==null){
             result= true;
@@ -83,9 +81,7 @@ public class TreeSolution {
 
         List first=new ArrayList();
         first.add(root);
-
         queue.offer(first);
-
         while(queue.size()>0){
                 List<TreeNode> temp=queue.poll(); //当前层
             List<Integer> results=new ArrayList<>();   //结果层
@@ -152,7 +148,8 @@ public class TreeSolution {
         while(!key.isEmpty()){
             TreeNode temp=key.pop();
             int  tempvalue=value.pop();
-            if(tempvalue>max)max=tempvalue;
+            if(tempvalue>max)
+                max=tempvalue;
 
             if(temp.left!=null){
                 key.push(temp.left);

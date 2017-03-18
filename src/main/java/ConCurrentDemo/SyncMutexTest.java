@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.Condition;
 
 /**
  * Created by lenovo on 2017/1/28.
@@ -16,6 +17,7 @@ public class SyncMutexTest {
     private static CountDownLatch countDownLatch=new CountDownLatch(1);
     private static CountDownLatch downLatch=new CountDownLatch(2);
     private static final SynMutex synMutex=new SynMutex();
+
     public static void main(String[] args){
 
         long start= System.currentTimeMillis();

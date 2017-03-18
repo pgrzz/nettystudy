@@ -14,6 +14,7 @@
 
 
 
+
     <bean id="curatorDiscovery" class="protooneday.client.CuratorDiscovery">
         <constructor-arg name="CONFIGUER" value="${registry.CONFIGUER}" />
         <constructor-arg name="registryAddress" value="${registry.address}" />

@@ -47,6 +47,7 @@ public class SailEncode extends MessageToByteEncoder<ByteHolder> {
         byte status=response.getStatus();
         long invokedId=response.getId();
         byte[]bytes=response.getBytes();
+
         int len=bytes.length;
         out.writeShort(SailHeader.MAGIC);
         out.writeByte(sign);
