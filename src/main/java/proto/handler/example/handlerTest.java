@@ -160,7 +160,7 @@ public class handlerTest {
             @Override
             public ChannelHandler[] handlers() {
                 return new ChannelHandler[]{
-                        this,
+                        this, //watchDog
                         new IdleStateCheckHandler(timer,60,0,0),
                         idleTrigger,
                         new SailDecode(),
@@ -175,7 +175,7 @@ public class handlerTest {
             bootstrap.handler(new ChannelInitializer<Channel>() {
                 @Override
                 protected void initChannel(Channel ch) throws Exception {
-                    ch.pipeline().addLast(watchDog.handlers());
+                    ch.pipeline().addLast(watchDog.handlers()); // shareAble 的体现 handler 复用
                 }
             });
         }

@@ -4,6 +4,7 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.ReferenceCountUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import proto.Processor;
@@ -20,6 +21,7 @@ public class ConnectHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        //这里还应该打印异常的原因
         ctx.channel().close();
     }
 
@@ -36,10 +38,15 @@ public class ConnectHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if(msg instanceof SailResponseByte){
-            processor.handlerResponse((SailResponseByte) msg,ctx.channel());
+            try {
+                processor.handlerResponse((SailResponseByte) msg,ctx.channel());
+            }catch (Throwable t){
+                logger.error("unhandler exception {}, on channelRead()",t.getCause(),ctx.channel());
+            }
         }else{
             logger.info("can't processor this type :{}"+msg.getClass());
         }
+        ReferenceCountUtil.release(msg);
     }
 
     public Processor getProcessor() {

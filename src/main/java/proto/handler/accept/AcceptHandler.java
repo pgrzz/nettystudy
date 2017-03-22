@@ -55,9 +55,9 @@ public class AcceptHandler extends ChannelInboundHandlerAdapter {
 
             }else{
                 logger.warn("can't process this type of msg : {}" ,msg.getClass());
-                ReferenceCountUtil.release(msg);
-            }
 
+            }
+        ReferenceCountUtil.release(msg);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class AcceptHandler extends ChannelInboundHandlerAdapter {
     public void channelWritabilityChanged(ChannelHandlerContext ctx) throws Exception {
         Channel channel=ctx.channel();
 
-        if(!channel.isWritable()) { //写缓满了
+        if(!channel.isWritable()) { //写缓满了 在 《unix网络编程中有介绍》 当 缓冲中的值小于最低水位 select是不会关心 对这个缓冲的相关事件的
             // 高水位线: ChannelOption.WRITE_BUFFER_HIGH_WATER_MARK
             // 低水位线: ChannelOption.WRITE_BUFFER_LOW_WATER_MARK
             channel.config().setAutoRead(false);
